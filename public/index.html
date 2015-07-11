@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+   <!-- <link rel="icon" type="image/png" href="assets/images/favicon.png">-->
+    <title>Shinu and Justin's Wedding Website</title>
+
+    <!--<link rel="stylesheet" href="assets/vendor/material-design-lite/material.min.css">-->
+    <link rel="stylesheet" href="assets/css/material-modified.min.css">
+    <script src="assets/vendor/material-design-lite/material.min.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/SandJ.css">
+
+
+    <!--angular js files-->
+    <script src="./assets/vendor/angular/angular.js"></script>
+    <script src="./assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!--custom js-->
+    <script src="./assets/js/clientApp.js"></script>
+
+</head>
+
+<body ng-app="SandJ">
+
+
+<!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+
+</style>
+<div class="layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Shinu and Justin's Wedding Website</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" ui-sref="home">Home</a>
+                <a class="mdl-navigation__link" ui-sref="ceremony">Ceremony</a>
+                <a class="mdl-navigation__link" ui-sref="reception">Reception</a>
+                <a class="mdl-navigation__link" href="">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Wedding Info</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link"  ui-sref="home">Home</a>
+            <a class="mdl-navigation__link"  ui-sref="ceremony">Ceremony</a>
+            <a class="mdl-navigation__link" href="">Reception</a>
+            <a class="mdl-navigation__link" href="">Contact</a>
+            <hr>
+            <a class="mdl-navigation__link" href="">News</a>
+            <a class="mdl-navigation__link" href="">Polls</a>
+        </nav>
+    </div>
+
+
+
+    <main class="mdl-layout__content">
+
+        <ui-view></ui-view>
+
+    </main>
+</div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "WedSiteSJ",
+  "version": "0.0.0",
+  "description": "WedSiteSJ",
+  "main": "index.html",
+  "keywords": [
+    "WedSiteSJ",
+    "landingpage",
+    "webpage"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "respondJs": "~1.4.2",
+    "html5shiv": "~3.7.2",
+    "jquery": "~1.9.1",
+    "material-design-lite": "~1.0.0",
+    "angular":"~1.3.15",
+    "angular-ui-router": "~0.2.15"
+
+  }
+}
