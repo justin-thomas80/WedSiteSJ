@@ -2,7 +2,7 @@
 /*background image and text formatting*/
 /*****************************************/
 .layout-transparent {
-    background: url('../images/header-bg.jpg') center / cover;
+    background: url('../images/header-bg-2.jpg') center / cover;
 }
 .layout-transparent .mdl-layout__header,
 .layout-transparent .mdl-layout__drawer-button {
@@ -38,6 +38,18 @@
 }
 
 
+.sj-ceremony-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 376px;
+    background: url('../images/ceremony.jpg') center / cover;
+}
+
+.sj-contact-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 376px;
+    background: url('../images/contact.jpg') center / cover;
+}
+
 .sj-reception-card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
@@ -55,4 +67,27 @@
         background-position:center;
     }
 
+    .sj-contact-card-wide > .mdl-card__title{
+        background-position-y: -190px;
+    }
 }
+
+
+
+.sj-gallery-container .mdl-card__media{
+    background-color: white;
+}
+
+#sj-gallery-container .item{
+    margin: 3px;
+}
+#sj-gallery-container .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+
+/*maps*/
+.angular-google-map-container { height: 400px; }

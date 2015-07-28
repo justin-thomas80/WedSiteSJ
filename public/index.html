@@ -20,6 +20,17 @@
     <script src="./assets/vendor/angular/angular.js"></script>
     <script src="./assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
 
+
+    <!--owl carousel and jquery-->
+    <link rel="stylesheet" href="./assets/vendor/owlcarousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="./assets/vendor/owlcarousel/owl-carousel/owl.theme.css">
+    <script src="./assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./assets/vendor/owlcarousel/owl-carousel/owl.carousel.min.js"></script>
+
+    <!--angular maps-->
+    <script src='./assets/vendor/lodash/lodash.min.js'></script>
+    <script src='./assets/vendor/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
     <!--custom js-->
     <script src="./assets/js/clientApp.js"></script>
 
@@ -32,7 +43,7 @@
 <style>
 
 </style>
-<div class="layout-transparent mdl-layout mdl-js-layout">
+<div ng-controller="baseCtrl" class="layout-transparent mdl-layout mdl-js-layout" >
     <header class="mdl-layout__header mdl-layout__header--transparent">
         <div class="mdl-layout__header-row">
             <!-- Title -->
@@ -44,19 +55,21 @@
                 <a class="mdl-navigation__link" ui-sref="home">Home</a>
                 <a class="mdl-navigation__link" ui-sref="ceremony">Ceremony</a>
                 <a class="mdl-navigation__link" ui-sref="reception">Reception</a>
-                <a class="mdl-navigation__link" href="">Contact</a>
+                <a class="mdl-navigation__link" ui-sref="contact">Contact</a>
             </nav>
         </div>
     </header>
-    <div class="mdl-layout__drawer">
+    <div id="sj-drawer-container" class="mdl-layout__drawer">
         <span class="mdl-layout-title">Wedding Info</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link"  ui-sref="home">Home</a>
-            <a class="mdl-navigation__link"  ui-sref="ceremony">Ceremony</a>
-            <a class="mdl-navigation__link" href="">Reception</a>
-            <a class="mdl-navigation__link" href="">Contact</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="home">Home</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()"  ui-sref="ceremony">Ceremony</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="reception">Reception</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="contact">Contact</a>
             <hr>
-            <a class="mdl-navigation__link" href="">News</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="news">News</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="gallery">Gallery</a>
+            <a class="mdl-navigation__link" ng-click="closeDrawer()" ui-sref="points-of-interest">Points of Interest</a>
             <a class="mdl-navigation__link" href="">Polls</a>
         </nav>
     </div>
