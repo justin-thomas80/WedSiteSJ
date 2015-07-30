@@ -42,6 +42,7 @@
     color: #fff;
     height: 376px;
     background: url('../images/ceremony.jpg') center / cover;
+    background-position-x: -290px
 }
 
 .sj-contact-card-wide > .mdl-card__title {
@@ -63,16 +64,22 @@
         height: 476px;
     }
 
+    .sj-ceremony-card-wide > .mdl-card__title {
+        background-position:center;
+    }
     .sj-reception-card-wide > .mdl-card__title {
         background-position:center;
     }
 
     .sj-contact-card-wide > .mdl-card__title{
-        background-position-y: -190px;
+        background: url('../images/contact2.jpg') center / cover;
+        background-position-y: -290px;
     }
 }
 
-
+.sj-gallery-container{
+    margin: 0 auto;
+}
 
 .sj-gallery-container .mdl-card__media{
     background-color: white;
@@ -87,7 +94,9 @@
     height: auto;
 }
 
-
-
 /*maps*/
 .angular-google-map-container { height: 400px; }
+
+.sj-maps-container{
+    margin:0 auto;
+}

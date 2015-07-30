@@ -1,12 +1,9 @@
 
 var mainMod= angular.module('SandJ', ['ui.router','uiGmapgoogle-maps']);
 
-console.log("in clientapp main");
-
 
 mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvider',function($stateProvider,$urlRouterProvider,uiGmapGoogleMapApiProvider) {
 
-    console.log("in app config");
     $stateProvider.state('home', {
         url: "/",
         templateUrl: "assets/js/partials/home.html",
@@ -58,39 +55,31 @@ mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvide
 
 
 mainMod.controller('baseCtrl',['$scope','$state',function($scope,$state){
-    console.log("BASE CTRL");
     $scope.closeDrawer= function(){
-      console.log("close drawer...");
         var sjDrawer = angular.element(document.getElementById("sj-drawer-container"));
         sjDrawer.removeClass("is-visible");
 
     };
 }]);
 
-
 mainMod.controller('homeCtrl',['$scope','$state',function($scope,$state){
-    console.log("HOME CTRL");
 }]);
 
 mainMod.controller('ceremonyCtrl',['$scope','$state',function($scope,$state){
-    console.log("CEREMONY CTRL");
 
 }]);
 
 mainMod.controller('contactCtrl',['$scope','$state',function($scope,$state){
-    console.log("CONTACT CTRL");
 }]);
 
 mainMod.controller('newsCtrl',['$scope','$state',function($scope,$state){
-    console.log("NEWS CTRL");
 }]);
 
 mainMod.controller('galleryCtrl',['$scope','$state',function($scope,$state){
-    console.log("GALLERY CTRL");
     angular.element(document).ready(function(){
         $("#sj-gallery-container").owlCarousel({
             lazyLoad : true,
-            autoPlay : 6000,
+            autoPlay : false,//6000,
             stopOnHover : true,
             navigation:false,
             paginationSpeed : 1000,
@@ -105,7 +94,6 @@ mainMod.controller('galleryCtrl',['$scope','$state',function($scope,$state){
 
 
 mainMod.controller('pointsOfInterestCtrl',['$scope','$state','uiGmapGoogleMapApi',function($scope,$state,uiGmapGoogleMapApi){
-    console.log("POINTS OF INTEREST CTRL");
     $scope.map = { center: { latitude: -32.999432, longitude: 27.9354535 }, zoom: 10 };
 
 
@@ -151,7 +139,7 @@ mainMod.controller('pointsOfInterestCtrl',['$scope','$state','uiGmapGoogleMapApi
     uiGmapGoogleMapApi.then(function(maps) {
         //get current location
         //update map
-        console.log("mapLoaded in controler");
+//        console.log("mapLoaded in controler");
     });
 
 
