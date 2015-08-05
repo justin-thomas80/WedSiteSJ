@@ -2,7 +2,8 @@
 var mainMod= angular.module('SandJ', ['ui.router','uiGmapgoogle-maps']);
 
 
-mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvider',function($stateProvider,$urlRouterProvider,uiGmapGoogleMapApiProvider) {
+mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvider','$locationProvider',function($stateProvider,$urlRouterProvider,uiGmapGoogleMapApiProvider,$locationProvider) {
+//    $locationProvider.html5Mode(true);
 
     $stateProvider.state('home', {
         url: "/",
