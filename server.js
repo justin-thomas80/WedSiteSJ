@@ -18,7 +18,7 @@ app.set('port', process.env.PORT || 8080);
 
 
 var KSApp = require('./siteKS/appKS.js');
-var SJApp = require('./siteSJ/appSJ.js');
+var SJApp = require('./siteSJ/app.js');
 
 app.use(vhost('kevinandsamantha.ca', KSApp));
 app.use(vhost('shinuandjustin.com', SJApp));

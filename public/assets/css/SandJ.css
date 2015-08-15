@@ -38,6 +38,13 @@
 }
 
 
+.sj-engagement-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 376px;
+    background: url('../images/engagement.jpg') center / cover;
+    background-position-x: -180px
+}
+
 .sj-ceremony-card-wide > .mdl-card__title {
     color: #fff;
     height: 376px;
@@ -63,6 +70,12 @@
     .sj-home-card-wide > .mdl-card__title {
         height: 476px;
     }
+
+    .sj-engagement-card-wide > .mdl-card__title {
+        height: 376px;
+        background-position:center;
+    }
+
 
     .sj-ceremony-card-wide > .mdl-card__title {
         background-position:center;

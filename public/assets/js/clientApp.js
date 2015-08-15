@@ -3,7 +3,7 @@ var mainMod= angular.module('SandJ', ['ui.router','uiGmapgoogle-maps']);
 
 
 mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvider','$locationProvider',function($stateProvider,$urlRouterProvider,uiGmapGoogleMapApiProvider,$locationProvider) {
-//    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
     $stateProvider.state('home', {
         url: "/",
@@ -14,6 +14,12 @@ mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvide
     $stateProvider.state('ceremony', {
         url: "/ceremony",
         templateUrl: "assets/js/partials/ceremony.html",
+        controller:'ceremonyCtrl'
+    });
+
+    $stateProvider.state('engagement', {
+        url: "/engagement",
+        templateUrl: "assets/js/partials/engagement.html",
         controller:'ceremonyCtrl'
     });
 
@@ -63,20 +69,48 @@ mainMod.controller('baseCtrl',['$scope','$state',function($scope,$state){
     };
 }]);
 
-mainMod.controller('homeCtrl',['$scope','$state',function($scope,$state){
+mainMod.controller('homeCtrl',['$scope','$state','$location',function($scope,$state,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
+
 }]);
 
-mainMod.controller('ceremonyCtrl',['$scope','$state',function($scope,$state){
+mainMod.controller('ceremonyCtrl',['$scope','$state','$location',function($scope,$state,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
 
 }]);
 
-mainMod.controller('contactCtrl',['$scope','$state',function($scope,$state){
+mainMod.controller('contactCtrl',['$scope','$state','$location',function($scope,$state,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
 }]);
 
-mainMod.controller('newsCtrl',['$scope','$state',function($scope,$state){
+mainMod.controller('newsCtrl',['$scope','$state','$location',function($scope,$state,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
 }]);
 
-mainMod.controller('galleryCtrl',['$scope','$state',function($scope,$state){
+mainMod.controller('galleryCtrl',['$scope','$state','$location',function($scope,$state,$location){
+
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
+
     angular.element(document).ready(function(){
         $("#sj-gallery-container").owlCarousel({
             lazyLoad : true,
@@ -94,7 +128,14 @@ mainMod.controller('galleryCtrl',['$scope','$state',function($scope,$state){
 }]);
 
 
-mainMod.controller('pointsOfInterestCtrl',['$scope','$state','uiGmapGoogleMapApi',function($scope,$state,uiGmapGoogleMapApi){
+mainMod.controller('pointsOfInterestCtrl',['$scope','$state','uiGmapGoogleMapApi','$location',function($scope,$state,uiGmapGoogleMapApi,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
+
+
     $scope.map = { center: { latitude: -32.999432, longitude: 27.9354535 }, zoom: 10 };
 
 
