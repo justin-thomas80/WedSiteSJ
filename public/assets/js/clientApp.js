@@ -51,6 +51,14 @@ mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvide
         templateUrl: "assets/js/partials/points-of-interest.html",
         controller:'pointsOfInterestCtrl'
     });
+
+
+    $stateProvider.state('polls', {
+        url: "/polls",
+        templateUrl: "assets/js/partials/polls.html",
+        controller:'pollsCtrl'
+    });
+
     $urlRouterProvider.otherwise('/');
 
 
@@ -95,6 +103,167 @@ mainMod.controller('contactCtrl',['$scope','$state','$location',function($scope,
     });
 }]);
 
+mainMod.controller('pollsCtrl',['$scope','$state','$location','$http',function($scope,$state,$location,$http){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
+
+    $scope.questions = [];
+    $scope.pollAnswersArr  = [];
+
+    $http.get('/api/pollquestions').then(function(response){
+        //console.log("success",response);
+        $scope.questions = response.data;
+
+        angular.forEach($scope.questions,function(q,index){
+             $scope.pollAnswersArr[index]={
+                 showQuestionContainer: true,
+                 showCommentContainer:false,
+                 chosenAnswer:"A1",
+                 comment:""
+
+             }
+        });
+    },function(error){
+        console.log("error",error);
+    });
+
+
+    $scope.showCommentsContainer = function(cIndex,showOrHide){
+        $scope.pollAnswersArr[cIndex].showCommentsContainer=showOrHide;
+    };
+    $scope.sendAnswers = function(QID ,qIndex){
+        var pollResultsData={};
+        pollResultsData.QID=QID;
+        pollResultsData.A=$scope.pollAnswersArr[qIndex].chosenAnswer;
+        pollResultsData.C=$scope.pollAnswersArr[qIndex].comment;
+
+
+        $http.post('/api/pollResults',pollResultsData)
+            .success(function(data) {
+//                console.log("data returned: ", data);
+//                showWeddingToast("Thanks for participating in the poll");
+//                $scope.showPollFields.showPollQuestionsContainer=false;
+                $scope.pollAnswersArr[qIndex].showQuestionContainer=false;
+                var submittedQuestion={};
+                angular.forEach($scope.questions,function(q,i){
+                    if(q._id===QID){
+                        submittedQuestion = q;
+                    }
+                });
+                var graphData = accumulatePollResults(data,submittedQuestion);
+                $scope.pollAnswersArr[qIndex].graphData=graphData;
+//                console.log("graph data: ",graphData);
+                drawChart(graphData,qIndex);
+
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+
+
+    };
+    function accumulatePollResults(data,q){
+//        console.log("got q: ",q);
+        var totals ={};
+        totals["A1"]=0;
+        totals["A2"]=0;
+        totals["A3"]=0;
+        totals["A4"]=0;
+        totals["A5"]=0;
+        var comments = [];
+        var results={
+            labels:[],
+            series:[]
+        };
+        var series1=[];
+
+        var maxVal=0
+        $.each(data,function(index,pollResult){
+//            console.log("index: +" + index + ": " +pollResult.A);
+            totals[pollResult.A]++;
+            if(pollResult.C){
+                comments.push({comment:pollResult.C, commentDate:pollResult.resultDate});
+            }
+
+        });
+
+
+        for (i = 1; i < 6; i++) {
+            var answerString= "A"+i;
+            if(q[answerString]!==undefined){
+                results.labels.push(q[answerString]);
+                results.series.push(totals[answerString]);
+                //series1.push(totals[answerString]);
+            }
+        }
+
+        results.comments=comments;
+        return results;
+
+    }
+
+    function drawChart(graphData, chartIndex){
+        var data = {
+            // A labels array that can contain any sort of values
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            // Our series array that contains series objects or in this case series data arrays
+            series: [
+                [5, 2, 4, 2, 0]
+            ]
+        };
+
+        var options={
+            fullWidth: true,
+            centerBars: false
+        };
+
+        var pieChartData={
+
+            series: graphData.series
+        }
+
+        var sum = function(a, b) { return a + b };
+        var seriesTotal = graphData.series.reduce(sum);
+        var adjustedLabels = [];
+        $.each(graphData.labels,function(index, labelVal){
+            adjustedLabels.push(labelVal + " (" + Math.round(graphData.series[index]/seriesTotal *100) + "%)" );
+        });
+
+        pieChartData.labels = adjustedLabels;
+
+        // new Chartist.Bar('.ct-chart', graphData,options);
+        //new Chartist.Pie('.ct-chart', graphData);
+        var responsiveOptions = [
+            ['screen and (min-width: 240px)', {
+                chartPadding: 15,
+                labelOffset: 15,
+                labelDirection: 'explode'
+            }],
+            ['screen and (min-width: 468px)', {
+                chartPadding: 0,
+                labelOffset: 35,
+                labelDirection: 'explode'
+            }],
+            ['screen and (min-width: 1024px)', {
+                labelOffset: 35,
+                chartPadding: 0,
+                labelDirection: 'explode'
+
+            }]
+        ];
+
+        new Chartist.Pie('#q-chart-'+chartIndex, pieChartData,{
+        },responsiveOptions);
+
+    };
+
+
+
+}]);
+
 mainMod.controller('newsCtrl',['$scope','$state','$location',function($scope,$state,$location){
     $scope.$on('$viewContentLoaded', function(event) {
         ga('send', 'pageview', {
@@ -121,8 +290,8 @@ mainMod.controller('galleryCtrl',['$scope','$state','$location',function($scope,
             paginationNumbers:true,
             goToFirstSpeed : 2000,
             singleItem : true,
-            autoHeight : true,
-            transitionStyle:"fade"
+            autoHeight : true
+            //transitionStyle:"fade"
         });
     });
 }]);

@@ -1,0 +1,137 @@
+<!--
+<div class="sj-main-container mdl-grid">
+    <div class="mdl-card mdl-shadow--2dp sj-contact-card-wide  mdl-cell mdl-cell--12-col">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Polls</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <h6>For any questions or concerns, feel free to contact us at:
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                   href="mailto:info@shinuandjustin.com">
+                    info@shinuandjustin.com
+                </a>
+            </h6>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <div ng-repeat="question in questions">
+                {{question.Q}}
+            </div>
+
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="mailto:info@shinuandjustin.com">
+                Email us
+            </a>
+        </div>
+    </div>
+</div>-->
+
+<div class="sj-main-container mdl-grid">
+
+
+    <div class="sj-question-card" ng-repeat="question in questions">
+        <div class="mdl-card mdl-shadow--2dp  sj-contact-card-wideTTTTTTTTTTTTTT mdl-cell mdl-cell--12-col" >
+            <div class="mdl-card__title sj-poll-card-title">
+                <h2 class="mdl-card__title-text">Poll {{$index+1}}</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div class="sj-question-image-container" ng-show="pollAnswersArr[$index].showQuestionContainer"><img class="sj-question-image" src="{{question.imgSrc}}"></div>
+                <div class="sj-question-text"><h6> {{question.Q}}</h6></div>
+                <div class="sj-question-container" ng-show="pollAnswersArr[$index].showQuestionContainer">
+                    <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+
+                        <tr>
+
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q-{{$index}}-option-1">
+                                    <input type="radio" ng-model="pollAnswersArr[$index].chosenAnswer" id="Q-{{$index}}-option-1" class="mdl-radio__button" name="options-{{$index}}" value="A1" checked />
+                                    <span class="mdl-radio__label">{{question.A1}}</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q-{{$index}}-option-2">
+                                    <input type="radio" ng-model="pollAnswersArr[$index].chosenAnswer" id="Q-{{$index}}-option-2" class="mdl-radio__button" name="options-{{$index}}" value="A2"  />
+                                    <span class="mdl-radio__label">{{question.A2}}</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr ng-show="question.A3">
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q-{{$index}}-option-3">
+                                    <input type="radio" ng-model="pollAnswersArr[$index].chosenAnswer" id="Q-{{$index}}-option-3" class="mdl-radio__button" name="options-{{$index}}" value="A3"  />
+                                    <span class="mdl-radio__label">{{question.A3}}</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr ng-show="question.A4">
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q-{{$index}}-option-4">
+                                    <input type="radio" ng-model="pollAnswersArr[$index].chosenAnswer" id="Q-{{$index}}-option-4" class="mdl-radio__button" name="options-{{$index}}" value="A4"  />
+                                    <span class="mdl-radio__label">{{question.A4}}</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr ng-show="question.A5">
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q-{{$index}}-option-5">
+                                    <input type="radio" ng-model="pollAnswersArr[$index].chosenAnswer" id="Q-{{$index}}-option-5" class="mdl-radio__button" name="options-{{$index}}" value="A5"  />
+                                    <span class="mdl-radio__label">{{question.A5}}</span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div ng-show="question.C==''">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <textarea class="mdl-textfield__input" ng-model="pollAnswersArr[$index].comment" type="text" rows= "3" id="Q-C-{{$index}}" placeholder="Elaborate on your answer here..." ></textarea>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="sj-answer-container" ng-hide="pollAnswersArr[$index].showQuestionContainer">
+                        <div><h6>Results:</h6></div>
+                        <div id="q-chart-{{$index}}"></div>
+                        <div class="" ng-show="question.C==''">
+                            <button ng-click="showCommentsContainer($index,true)" ng-hide="pollAnswersArr[$index].showCommentsContainer" class="sj-answer-button-container mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored ">
+                                Show Comments
+                            </button>
+                            <button ng-click="showCommentsContainer($index,false)" ng-show="pollAnswersArr[$index].showCommentsContainer" class="sj-answer-button-container mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored ">
+                                Hide Comments
+                            </button>
+                            <div id="" ng-show="pollAnswersArr[$index].showCommentsContainer">
+                                <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Comment Date</th>
+                                        <th>comment</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="sq in pollAnswersArr[$index].graphData.comments" >
+                                        <td class="mdl-data-table__cell--non-numeric">{{sq.commentDate}}</td>
+                                        <td class="mdl-data-table__cell--non-numeric">{{sq.comment}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border sj-question-submit-button" ng-show="pollAnswersArr[$index].showQuestionContainer">
+
+                    <button ng-click="sendAnswers(question._id,$index)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored ">
+                        Submit
+                    </button>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

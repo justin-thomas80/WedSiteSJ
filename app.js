@@ -4,11 +4,39 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
+var weddingAPI = require('./routes/weddingAPI');
 
 var app = express();
+
+//mongoose.connect('mongodb://localhost:27017/sjweddingdb');
+var sjweddingdb = mongoose.createConnection('mongodb://localhost:27017/sjweddingdb');
+var dbModels={};
+
+dbModels.dbModelPollQuestions = sjweddingdb.model('pollquestions',{
+    imgSrc: String,
+    Q: String,
+    A1: String,
+    A2: String,
+    A3: String,
+    A4: String,
+    A5: String,
+    C: String
+});
+
+
+dbModels.dbModelPollResults = sjweddingdb.model('pollresults',{
+    QID: mongoose.Schema.ObjectId,
+    A: String,
+    C: String,
+    resultDate: String,
+    requestIp:String
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +51,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
+app.use('/', weddingAPI(sjweddingdb,dbModels));
 app.all('/*', function(req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
     //sendfile('./public/index.html');

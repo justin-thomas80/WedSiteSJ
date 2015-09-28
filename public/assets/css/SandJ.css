@@ -113,3 +113,57 @@
 .sj-maps-container{
     margin:0 auto;
 }
+
+
+.sj-poll-card-title{
+    color: #ffffff;
+    background-color: rgba(0,150,136,0.5);
+}
+
+.sj-question-card{
+    width:100%;
+    margin: 0 auto;
+
+
+}
+
+.sj-question-container{
+    text-align: center;
+
+}
+.sj-answer-container{
+    text-align: center;
+}
+
+.sj-answer-button-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.sj-question-text{
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .sj-question-text{
+        width: 50%;
+    }
+}
+.sj-question-image-container{
+    text-align: center;
+}
+
+
+.sj-question-image{
+    width: 40%;
+}
+.sj-question-card table{
+    margin: 0 auto;
+}
+
+.sj-question-submit-button{
+    text-align: right;
+}
