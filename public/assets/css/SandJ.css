@@ -58,6 +58,14 @@
     background: url('../images/contact.jpg') center / cover;
 }
 
+.sj-gifts-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 376px;
+    background: url('../images/gifts.JPG');
+    background-size: cover;
+    background-position-x: -350px;
+}
+
 .sj-reception-card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
@@ -87,6 +95,12 @@
     .sj-contact-card-wide > .mdl-card__title{
         background: url('../images/contact2.jpg') center / cover;
         background-position-y: -290px;
+    }
+    .sj-gifts-card-wide > .mdl-card__title {
+        color: #fff;
+        height: 376px;
+        background: url('../images/gifts.JPG') center / cover;
+
     }
 }
 

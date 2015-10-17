@@ -35,6 +35,12 @@ mainMod.config(['$stateProvider','$urlRouterProvider','uiGmapGoogleMapApiProvide
         controller:'contactCtrl'
     });
 
+    $stateProvider.state('gifts', {
+        url: "/gifts",
+        templateUrl: "assets/js/partials/gifts.html",
+        controller:'giftsCtrl'
+    });
+
     $stateProvider.state('news', {
         url: "/news",
         templateUrl: "assets/js/partials/news.html",
@@ -96,6 +102,15 @@ mainMod.controller('ceremonyCtrl',['$scope','$state','$location',function($scope
 }]);
 
 mainMod.controller('contactCtrl',['$scope','$state','$location',function($scope,$state,$location){
+    $scope.$on('$viewContentLoaded', function(event) {
+        ga('send', 'pageview', {
+            'page': $location.url()
+        });
+    });
+}]);
+
+
+mainMod.controller('giftsCtrl',['$scope','$state','$location',function($scope,$state,$location){
     $scope.$on('$viewContentLoaded', function(event) {
         ga('send', 'pageview', {
             'page': $location.url()
